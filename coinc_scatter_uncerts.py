@@ -9,8 +9,8 @@ import numpy as np
 angles = [70., 60., 50., 40., 30., 20., 20., 30., 40., 50., 60., 70.]
 dists = [66.4, 63.8, 63.2, 63.6, 64.9, 65.8, 66.0, 65.3, 63.4, 62.7, 64.3, 66.5]
 Ens = [11.325, 4.825]
-Ed = [8.209, 1.611] # from http://www.tunl.duke.edu/magnet.php
-Ed_loss_in_gas = [0.103, 0.387] # from http://www.tunl.duke.edu/magnet.php
+Ed = [8.209, 1.611] # from http://www.tunl.duke.edu/magnet.php , dcell length = 2.8575
+Ed_loss_in_gas = [0.095, 0.344] # from http://www.tunl.duke.edu/magnet.php (pressure: 11.325 - 1.85psi, 4.825 - 1.78 psi)
 
 # systematic uncertainties
 ## position
@@ -61,5 +61,7 @@ for n, En in enumerate(Ens):
     for s, sig in enumerate(sigma_tot):
         print '{:^7} {:>8} {:>11} {:>13} {:>14} {:>12}'.format(angles[s], round(sigma_sys[s],3), round(sigma_Ep[s],3), round(sigma_Ep_bar[s],3), round(sigma_tot[s],3), round(sigma_Ep_bar[s]/Ep[s],3))
 
+    print sigma_En
+    print (np.sin(np.deg2rad(theta))**2*sigma_En)**2, (En*np.sin(np.deg2rad(2*theta))*sigma_theta[i])**2
 
 
